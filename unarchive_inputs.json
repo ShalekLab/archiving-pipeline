@@ -1,0 +1,5 @@
+{
+    "UnArchive.input_tar": "gs://fc-000000000-/COLD_STORE/test_input_folder.tgz",
+    "UnArchive.output_folder": "gs://fc-0000000000-/HOT/",
+    "UnArchive.delete_input_tar": false
+}

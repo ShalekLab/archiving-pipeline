@@ -1,0 +1,5 @@
+{
+    "Archive.input_folder": "gs://fc-00000000-/test_input_folder",
+    "Archive.output_folder": "gs://fc-00000000-/COLD_STORE/test_input_folder.tgz",
+    "Archive.delete_input_folder": false
+}
