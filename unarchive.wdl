@@ -3,11 +3,22 @@ workflow UnArchive {
 	String output_folder
 	Boolean? delete_input_tar = false
 
+    String? zones = "us-east1-d us-west1-a us-west1-b us-central1-b"
+	Int? num_cpu = 64
+	String? memory = "128G"
+	Int? disk_space = 1000
+	Int? preemptible = 3
+
 	call archive_folder {
 		input:
 			input_tar = input_tar,
 			output_folder = output_folder,
 			delete_input_tar = delete_input_tar,
+            memory = memory,
+			disk_space = disk_space,
+			preemptible = preemptible,
+			zones = zones,
+			num_cpu = num_cpu
 	}
 
 	output {
@@ -19,7 +30,12 @@ task archive_folder {
 	String input_tar
 	String output_folder
 	Boolean delete_input_tar
-
+    	
+	String zones
+	Int num_cpu
+	String memory
+	Int disk_space
+	Int preemptible
 
 	command {
 		
@@ -41,6 +57,16 @@ task archive_folder {
 
 	output {
 		String outputfile = "${output_folder}"
+	}
+
+	runtime {
+		docker: "google/cloud-sdk:244.0.0"
+		zones: zones
+		memory: memory
+		bootDiskSizeGb: 12
+		disks: "local-disk ${disk_space} HDD"
+		cpu: num_cpu
+		preemptible: preemptible
 	}
 
 }
